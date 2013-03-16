@@ -28,15 +28,26 @@ if number and letter:
         message = "The file '<em>" + message + "</em>' was enqueued: " + str(sent)
 
 else:
+
     files = sorted(glob.glob('/var/jukebox/*/*/*'))
 
-    message='<table border="1">'
+    message='<table border="1">\n'
+
+
+    URL_FMT = "http://%s:%s/%s?number=%%s&letter=%%s" % (
+        os.environ['SERVER_NAME'],
+        os.environ['SERVER_PORT'],
+        os.environ['SCRIPT_NAME'])
+
+    message += "<!-- %s -->\n" % URL_FMT
 
     for file in files:
-        lnn = tuple(file.split('/')[-3:])
-	message += ("<tr><td>%s</td><td>%s</td><td>%s</td></tr>" % lnn)
+        (letter, number, name) = tuple(file.split('/')[-3:])
+        url = URL_FMT % (letter, number)
+	message += ('<tr><td>%s</td><td>%s</td><td><a href="%s">%s</a></td></tr>\n' % (letter, number, url, name))
 
-    message += "</table>"
+
+    message += "</table>\n"
 
 print """\
 Content-Type: text/html\n
