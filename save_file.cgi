@@ -1,18 +1,25 @@
 #!/usr/bin/env python
 
-import os
 import cgi
-import glob
 import cgitb; cgitb.enable()
+import glob
+import os
+import string
 
 form = cgi.FieldStorage()
 letter = form.getvalue('letter')
 number = form.getvalue('number')
 upload = form['file']
 
+
+def sanitize_filename(fname):
+    sane = set(string.letters + string.digits + '-_.')
+    return ''.join(c for c in fname if c in sane)
+
 if upload.filename:
-    name    = os.path.basename(upload.filename)
-    outDir  = os.path.join('/var/jukebox',letter,number)
+    name    = sanitize_filename(os.path.basename(upload.filename))
+#    name    = os.path.basename(upload.filename)
+    outDir  = os.path.join('/var/jukebox', letter, number)
     try:
         os.makedirs(outDir)
     except:
