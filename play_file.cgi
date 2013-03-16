@@ -4,18 +4,29 @@ import os
 import cgi
 import glob
 import time
-import cgitb; cgitb.enable()
+import cgitb
+import socket
+import sys
+
+PORT    = 55555
+ADDRESS = ('localhost', PORT)
+
+cgitb.enable()
+
 
 form = cgi.FieldStorage()
 number = form.getvalue('number', None)
 letter = form.getvalue('letter', None)
 
 if number and letter:
-    with open('/dev/shm/jbq-%d' % int(time.time()),'w') as w:
-        w.write(number)
-        w.write(' ')
-        w.write(letter)
-    message = "The file '<em>" + number + letter + "</em>' was enqueued."
+    # Create a UDP socket
+#    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    if sock:
+        message = number + ' ' + letter
+        sent = sock.sendto(message, ADDRESS)
+        message = "The file '<em>" + message + "</em>' was enqueued: " + str(sent)
+
 else:
     files = sorted(glob.glob('/var/jukebox/*/*/*'))
 
