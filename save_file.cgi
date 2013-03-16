@@ -38,6 +38,9 @@ if upload.filename:
     for o in old:
         if o == outName: continue
 	os.unlink(o)
+
+    os.system('mp3gain "' + outName + '" 2>&1 > /dev/null ')
+
 else:
 
     message = "Derp... could you try that again please?"
