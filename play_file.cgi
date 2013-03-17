@@ -74,23 +74,32 @@ def enqueue(letter, number):
     sent = sock.sendto(message, ADDRESS)
     return "The file '<em>" + message + "</em>' was enqueued: " + str(sent)
 
+def fileList():
     files = sorted(glob.glob('/var/jukebox/*/*/*'))
 
-    message='<table border="1">\n'
+    ret = collections.defaultdict(dict)
+    for file in files:
+        (letter, number, name) = tuple(file.split('/')[-3:])
+        ret[letter][int(number)] = name
 
+    return dict(ret)
 
-    URL_FMT = "http://%s:%s/%s?number=%%s&letter=%%s" % (
+def playlist(files):
+    message = '<table border="1">\n'
+
+    URL_FMT = "http://%s:%s/%s?letter=%%s&number=%%d" % (
         os.environ['SERVER_NAME'],
         os.environ['SERVER_PORT'],
         os.environ['SCRIPT_NAME'])
 
     message += "<!-- %s -->\n" % URL_FMT
 
-    for file in files:
-        (letter, number, name) = tuple(file.split('/')[-3:])
-        url = URL_FMT % (letter, number)
-	message += ('<tr><td>%s</td><td>%s</td><td><a href="%s">%s</a></td></tr>\n' % (letter, number, url, name))
-
+    for letter in sorted(files):
+        d = files[letter]
+        for number in sorted(d):
+            url = URL_FMT % (letter, number)
+            message += ('<tr><td>%s</td><td>%d</td><td><a href="%s">%s</a></td></tr>\n' % (
+                    letter, number, url, d[number]))
 
     message += "</table>\n"
 
