@@ -115,13 +115,14 @@ def playlist(files):
         d = files[letter]
         col1 = '<td rowspan="%d">%s</td>' % (len(d), letter)
         for number in sorted(d):
+            name = "<a href='/jukebox/%s/%d/%s'>%s</a>" % (letter, number, d[number],d[number])
             message += ("""<TR>
     %s
     <td>%d</td>
     <td><em>%s</em></td>
     <td>%s</td>
 </TR>\n""" % (
-                    col1, number, d[number],
+                    col1, number, name,#d[number],
                     BTNS_FMT.format(letter = letter, number = number)))
             col1=''
 
