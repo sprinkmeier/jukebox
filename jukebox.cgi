@@ -50,16 +50,12 @@ def uploadFile(upload, letter, number):
     out = open(outName, 'wb')
     message = "The file '<em>" + name + "</em>' was uploaded successfully to <em>" + outName + "</em>"
 
-    #message += repr(old)
-
     while True:
-        packet = upload.file.read(16 * 1024)
-        #message += ' ' + str(len(packet))
+        packet = upload.file.read(64 * 1024)
         if not packet:
             break
         out.write(packet)
     out.close()
-
 
 #    os.system('mp3gain "' + outName + '" 2>&1 > /dev/null ')
 
