@@ -19,8 +19,50 @@ cgitb.enable()
 form = cgi.FieldStorage()
 number = form.getvalue('number', None)
 letter = form.getvalue('letter', None)
+try:
+    upload = form['file']
+except:
+    upload = None
 
-if number and letter:
+def sanitize_filename(fname):
+    sane = set(string.letters + string.digits + '-_.')
+    return ''.join(c for c in fname if c in sane)
+
+def uploadFile(upload, letter, number):
+    if upload is None:      return ''
+    if not upload.filename: return ''
+
+    name    = sanitize_filename(os.path.basename(upload.filename))
+    outDir  = os.path.join('/var/jukebox', letter, number)
+
+    try:
+        os.makedirs(outDir)
+    except:
+        pass
+
+    old = glob.glob(os.path.join(outDir,'*'))
+    for o in old:
+        os.unlink(o)
+
+    outName = os.path.join(outDir, name)
+    out = open(outName, 'wb')
+    message = "The file '<em>" + name + "</em>' was uploaded successfully to <em>" + outName + "</em>"
+
+    #message += repr(old)
+
+    while True:
+        packet = upload.file.read(16 * 1024)
+        #message += ' ' + str(len(packet))
+        if not packet:
+            break
+        out.write(packet)
+    out.close()
+
+
+#    os.system('mp3gain "' + outName + '" 2>&1 > /dev/null ')
+
+    return message
+
     # Create a UDP socket
 #    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
