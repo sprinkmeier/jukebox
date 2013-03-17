@@ -19,6 +19,8 @@ cgitb.enable()
 form = cgi.FieldStorage()
 number = form.getvalue('number', None)
 letter = form.getvalue('letter', None)
+submit = form.getvalue('submit', None)
+
 try:
     upload = form['file']
 except:
@@ -64,13 +66,22 @@ def uploadFile(upload, letter, number):
     return message
 
 
-def enqueue(letter, number):
+def process(submit, letter, number):
+    if not submit: return ''
     if not letter: return ''
     if not number: return ''
+
+    message = letter + ' ' + number
+    outDir  = os.path.join('/var/jukebox', letter, number)
+
+    if submit == "Delete":
+        os.system("rm %s/*" % outDir)
+        return "The file '<em>" + message + "</em>' was deleted"
+
     # Create a UDP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     if not sock: return ''
-    message = letter + ' ' + number
+
     sent = sock.sendto(message, ADDRESS)
     return "The file '<em>" + message + "</em>' was enqueued: " + str(sent)
 
@@ -87,31 +98,63 @@ def fileList():
 def playlist(files):
     message = '<table border="1">\n'
 
-    URL_FMT = "http://%s:%s/%s?letter=%%s&number=%%d" % (
-        os.environ['SERVER_NAME'],
-        os.environ['SERVER_PORT'],
-        os.environ['SCRIPT_NAME'])
+#    URL_FMT = "http://%s:%s/%s?letter=%%s&number=%%d" % (
+#        os.environ['SERVER_NAME'],
+#        os.environ['SERVER_PORT'],
+#        os.environ['SCRIPT_NAME'])
+#    message += "<!-- %s -->\n" % URL_FMT
 
-    message += "<!-- %s -->\n" % URL_FMT
+    BTNS_FMT = """<form action="%s" method="post">
+    <input type=hidden name='letter' value='{letter}'>
+    <input type=hidden name='number' value='{number}'>
+    <input type="submit" name="submit" value="Play">
+    <input type="submit" name="submit" value="Delete">
+</form>""" %  (os.environ['SCRIPT_NAME'],)
 
     for letter in sorted(files):
         d = files[letter]
+        col1 = '<td rowspan="%d">%s</td>' % (len(d), letter)
         for number in sorted(d):
-            url = URL_FMT % (letter, number)
-            message += ('<tr><td>%s</td><td>%d</td><td><a href="%s">%s</a></td></tr>\n' % (
-                    letter, number, url, d[number]))
+            message += ("""<TR>
+    %s
+    <td>%d</td>
+    <td><em>%s</em></td>
+    <td>%s</td>
+</TR>\n""" % (
+                    col1, number, d[number],
+                    BTNS_FMT.format(letter = letter, number = number)))
+            col1=''
 
     message += "</table>\n"
 
     return message
 
 def uploader(files):
-    LETTERS = "ABCDEFGHJKLMNOPQR"
+    LETTERS = "ABCDEFGHJKLMNPQR"
 
-    letters = '\n'.join(['<option value="%s">%s</option>' % (l, l) for l in LETTERS])
+    selected = ('A', 1)
+    for letter in reversed(LETTERS):
+        if letter not in files:
+            selected = (letter, 1)
+            continue
+        numbers = set(range(1,11)).difference(set(files[letter]))
+        if numbers:
+            selected = (letter, min(numbers))
 
-    numbers = '\n'.join(['<option value="%d">%d</option>' % (i, i) for i in range(1,11)])
+    letters = ''
 
+    for letter in LETTERS:
+        if letter == selected[0]:
+            letters += '<option value="%s" selected>%s</option>\n' % (letter, letter)
+        else:
+            letters += '<option value="%s">%s</option>\n' % (letter, letter)
+
+    numbers = ''
+    for number in range(1,11):
+        if number == selected[1]:
+            numbers += '<option value="%s" selected>%s</option>\n' % (number, number)
+        else:
+            numbers += '<option value="%s">%s</option>\n' % (number, number)
 
     message = """
 
@@ -132,7 +175,7 @@ def uploader(files):
 
 message = uploadFile(upload, letter, number)
 if not message:
-    message = enqueue(letter, number)
+    message = process(submit, letter, number)
 
 files = fileList()
 
@@ -144,6 +187,5 @@ print """\
 Content-Type: text/html\n
 <html><body>
 <p>%s</p>
-<!-- <p><a href="/">back...</a></p> -->
 </body></html>
-""" % (message,)
+""" % (message)
