@@ -103,6 +103,43 @@ def playlist(files):
 
     message += "</table>\n"
 
+    return message
+
+def uploader(files):
+    LETTERS = "ABCDEFGHJKLMNOPQR"
+
+    letters = '\n'.join(['<option value="%s">%s</option>' % (l, l) for l in LETTERS])
+
+    numbers = '\n'.join(['<option value="%d">%d</option>' % (i, i) for i in range(1,11)])
+
+
+    message = """
+
+    <form enctype="multipart/form-data" action="%s" method="post">
+        <select name="letter">
+            %s
+        </select>
+        <select name="number">
+            %s
+        </select>
+        <p>File: <input type="file" name="file"></p>
+        <p><input type="submit" value="Upload"></p>
+    </form>
+""" % (os.environ['SCRIPT_NAME'], letters, numbers)
+
+
+    return message
+
+message = uploadFile(upload, letter, number)
+if not message:
+    message = enqueue(letter, number)
+
+files = fileList()
+
+message += playlist(files)
+
+message += uploader(files)
+
 print """\
 Content-Type: text/html\n
 <html><body>
