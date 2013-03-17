@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 
-import os
 import cgi
-import glob
-import time
 import cgitb
+import collections
+import glob
+import os
 import socket
+import string
 import sys
+import time
 
 PORT    = 55555
 ADDRESS = ('localhost', PORT)
@@ -53,7 +55,6 @@ print """\
 Content-Type: text/html\n
 <html><body>
 <p>%s</p>
-<p><a href="/">back...</a></p>
+<!-- <p><a href="/">back...</a></p> -->
 </body></html>
 """ % (message,)
-
