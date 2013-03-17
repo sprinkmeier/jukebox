@@ -1,9 +1,3 @@
-# cp /var/www/index.html .
-# cp /usr/lib/cgi-bin/play_file.cgi .
-# cp /usr/lib/cgi-bin/save_file.cgi .
 
-
-
-sudo cp --update --verbose ./play_file.cgi /usr/lib/cgi-bin/
-sudo cp --update --verbose ./save_file.cgi /usr/lib/cgi-bin/
+sudo cp --update --verbose ./jukebox.cgi /usr/lib/cgi-bin/
 sudo cp index.html /var/www/index.html
