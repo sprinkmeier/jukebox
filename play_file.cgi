@@ -63,15 +63,16 @@ def uploadFile(upload, letter, number):
 
     return message
 
-    # Create a UDP socket
-#    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    if sock:
-        message = number + ' ' + letter
-        sent = sock.sendto(message, ADDRESS)
-        message = "The file '<em>" + message + "</em>' was enqueued: " + str(sent)
 
-else:
+def enqueue(letter, number):
+    if not letter: return ''
+    if not number: return ''
+    # Create a UDP socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    if not sock: return ''
+    message = letter + ' ' + number
+    sent = sock.sendto(message, ADDRESS)
+    return "The file '<em>" + message + "</em>' was enqueued: " + str(sent)
 
     files = sorted(glob.glob('/var/jukebox/*/*/*'))
 
