@@ -194,14 +194,25 @@ def buttons():
 
 def status():
     try:
-        message  = "<pre>"
-        message += repr(json.loads(open('/dev/shm/jukebox.json').read()))
-        message += "</pre>"
+        message  = ""
+        stat = json.loads(open('/dev/shm/jukebox.json').read())
+	if 'current' in stat:
+            message += 'Now Playing: <em>' + os.path.split(stat['current'])[1] + '</em><br/>'
+	if 'length' in stat:
+            message += str(stat['length']) + ' queued<br/><ol><li>'
+            message += '</li><li>'.join([x[0] + x[1] for x in stat['queue']])
+        message += '</li></ol>'
         return message
     except:
         return ''
 
-message = uploadFile(upload, letter, number)
+message = ''
+
+message += status()
+
+message += buttons()
+
+message += uploadFile(upload, letter, number)
 if not message:
     message = process(submit, letter, number)
 
@@ -211,9 +222,6 @@ message += playlist(files)
 
 message += uploader(files)
 
-message += buttons()
-
-message += status()
 
 print """\
 Content-Type: text/html\n
