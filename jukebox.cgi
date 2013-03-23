@@ -63,6 +63,10 @@ def uploadFile(upload, letter, number):
 
 
 def process(submit, letter, number):
+
+    if submit == "Shutdown":
+        return str(os.system("sudo /sbin/poweroff"))
+
     if not submit: return ''
     if not letter: return ''
     if not number: return ''
@@ -82,7 +86,7 @@ def process(submit, letter, number):
     return "The file '<em>" + message + "</em>' was enqueued: " + str(sent)
 
 def fileList():
-    files = sorted(glob.glob('/var/jukebox/*/*/*'))
+    files = sorted(glob.glob('/var/jukebox/[A-Z]/*/*'))
 
     ret = collections.defaultdict(dict)
     for file in files:
@@ -179,6 +183,13 @@ files = fileList()
 message += playlist(files)
 
 message += uploader(files)
+
+message += """
+   <br/>
+   <form enctype="multipart/form-data" action="%s" method="post">
+        <p><input type="submit" name="submit" value="Shutdown"></p>
+    </form>
+""" % os.environ['SCRIPT_NAME']
 
 print """\
 Content-Type: text/html\n
