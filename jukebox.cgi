@@ -62,13 +62,15 @@ def uploadFile(upload, letter, number):
 
     return message
 
+def sendUDP(msg):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    return sock.sendto(msg, ADDRESS)
+
 
 def process(submit, letter, number):
-
-    if submit == "Shutdown":
-        return str(os.system("sudo /sbin/poweroff"))
-
     if not submit: return ''
+    sendUDP(submit)
+
     if not letter: return ''
     if not number: return ''
 
@@ -80,10 +82,8 @@ def process(submit, letter, number):
         return "The file '<em>" + message + "</em>' was deleted"
 
     # Create a UDP socket
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    if not sock: return ''
+    sent = sendUDP(message)
 
-    sent = sock.sendto(message, ADDRESS)
     return "The file '<em>" + message + "</em>' was enqueued: " + str(sent)
 
 def fileList():
@@ -175,6 +175,23 @@ def uploader(files):
 
     return message
 
+def button(name):
+    return """
+   <form enctype="multipart/form-data" action="%s" method="post">
+        <p><input type="submit" name="submit" value="%s"></p>
+    </form>
+""" % (os.environ['SCRIPT_NAME'], name)
+
+
+def buttons():
+    message  = "<table><tr><td>"
+    message += "</td><td>".join((button("Stop"),
+                                 button("Flush"),
+                                 button("Shutdown"),
+                            ))
+    message += "</td></tr></table>"
+    return message
+
 def status():
     try:
         message  = "<pre>"
@@ -194,12 +211,8 @@ message += playlist(files)
 
 message += uploader(files)
 
-message += """
-   <br/>
-   <form enctype="multipart/form-data" action="%s" method="post">
-        <p><input type="submit" name="submit" value="Shutdown"></p>
-    </form>
-""" % os.environ['SCRIPT_NAME']
+message += buttons()
+
 message += status()
 
 print """\
