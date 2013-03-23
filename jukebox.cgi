@@ -4,6 +4,7 @@ import cgi
 import cgitb
 import collections
 import glob
+import json
 import os
 import socket
 import string
@@ -174,6 +175,15 @@ def uploader(files):
 
     return message
 
+def status():
+    try:
+        message  = "<pre>"
+        message += repr(json.loads(open('/dev/shm/jukebox.json').read()))
+        message += "</pre>"
+        return message
+    except:
+        return ''
+
 message = uploadFile(upload, letter, number)
 if not message:
     message = process(submit, letter, number)
@@ -190,6 +200,7 @@ message += """
         <p><input type="submit" name="submit" value="Shutdown"></p>
     </form>
 """ % os.environ['SCRIPT_NAME']
+message += status()
 
 print """\
 Content-Type: text/html\n
