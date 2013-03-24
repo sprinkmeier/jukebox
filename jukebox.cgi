@@ -198,7 +198,7 @@ def status():
         stat = json.loads(open('/dev/shm/jukebox.json').read())
 	if 'current' in stat:
             message += 'Now Playing: <em>' + os.path.split(stat['current'])[1] + '</em><br/>'
-	if 'length' in stat:
+	if ('length' in stat) and stat['length']:
             message += str(stat['length']) + ' queued<br/><ol><li>'
             message += '</li><li>'.join([x[0] + x[1] for x in stat['queue']])
         message += '</li></ol>'
