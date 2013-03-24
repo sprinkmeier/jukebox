@@ -133,14 +133,14 @@ def playlist(files):
     return message
 
 def uploader(files):
-    LETTERS = "ABCDEFGHJKLMNPQR"
+    LETTERS = "ABCDEFGHJKLMNPQRSTUV"
 
     selected = ('A', 1)
     for letter in reversed(LETTERS):
         if letter not in files:
             selected = (letter, 1)
             continue
-        numbers = set(range(1,11)).difference(set(files[letter]))
+        numbers = set(range(1,9)).difference(set(files[letter]))
         if numbers:
             selected = (letter, min(numbers))
 
@@ -153,7 +153,7 @@ def uploader(files):
             letters += '<option value="%s">%s</option>\n' % (letter, letter)
 
     numbers = ''
-    for number in range(1,11):
+    for number in range(1,9):
         if number == selected[1]:
             numbers += '<option value="%s" selected>%s</option>\n' % (number, number)
         else:
