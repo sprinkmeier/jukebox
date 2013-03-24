@@ -16,6 +16,7 @@ ADDRESS = ('localhost', PORT)
 
 cgitb.enable()
 
+title = 'Jukebox'
 
 form = cgi.FieldStorage()
 number = form.getvalue('number', None)
@@ -197,7 +198,10 @@ def status():
         message  = ""
         stat = json.loads(open('/dev/shm/jukebox.json').read())
 	if 'current' in stat:
-            message += 'Now Playing: <em>' + os.path.split(stat['current'])[1] + '</em><br/>'
+            current = os.path.split(stat['current'])[1]
+            message += 'Now Playing: <em>' + current + '</em><br/>'
+            global title
+            title = 'Jukebox - %s' % current
 	if 'length' in stat:
             message += str(stat['length']) + ' queued<br/><ol><li>'
             message += '</li><li>'.join([x[0] + x[1] for x in stat['queue']])
@@ -213,8 +217,8 @@ message += status()
 message += buttons()
 
 message += uploadFile(upload, letter, number)
-if not message:
-    message = process(submit, letter, number)
+
+message += process(submit, letter, number)
 
 files = fileList()
 
@@ -225,7 +229,8 @@ message += uploader(files)
 
 print """\
 Content-Type: text/html\n
+<head><title>%s</title></head>
 <html><body>
 <p>%s</p>
 </body></html>
-""" % (message)
+""" % (title, message)
