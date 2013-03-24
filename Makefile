@@ -5,7 +5,12 @@ PDFs =$(PSs:.ps=.pdf)
 
 ALL  =$(HTMLs) $(PSs) $(PDFs)
 
-default: $(ALL)
+CGI  =/usr/lib/cgi-bin/jukebox.cgi
+
+default: $(ALL) $(CGI)
+
+$(CGI): jukebox.cgi
+	sudo cp --update --verbose $^ $@
 
 %.pdf: %.ps
 	$(shell ps2pdf $^ $@ || rm $^ ; false )
