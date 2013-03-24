@@ -202,7 +202,7 @@ def status():
             message += 'Now Playing: <em>' + current + '</em><br/>'
             global title
             title = 'Jukebox - %s' % current
-	if 'length' in stat:
+	if ('length' in stat) and stat['length']:
             message += str(stat['length']) + ' queued<br/><ol><li>'
             message += '</li><li>'.join([x[0] + x[1] for x in stat['queue']])
         message += '</li></ol>'
