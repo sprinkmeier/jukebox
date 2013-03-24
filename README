@@ -1,3 +1,0 @@
-
-sudo cp --update --verbose ./jukebox.cgi /usr/lib/cgi-bin/
-sudo cp index.html /var/www/index.html
