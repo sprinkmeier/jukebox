@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 25 Mar 2013 06:45:57 CST
+EESchema Schematic File Version 2  date Mon 25 Mar 2013 18:42:11 CST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -44,6 +44,10 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Text Notes 3100 6000 0    60   ~ 0
+strobed low
+Text Notes 3100 2900 0    60   ~ 0
+tied high and read
 Wire Wire Line
 	7300 5100 7300 3050
 Wire Wire Line
@@ -242,17 +246,17 @@ F 1 "SW_PUSH" H 7600 5020 50  0000 C CNN
 	1    7600 5100
 	1    0    0    -1  
 $EndComp
-Text Label 3100 5800 0    60   ~ 0
-D12
-Text Label 3100 5700 0    60   ~ 0
-D11
-Text Label 3100 5600 0    60   ~ 0
-D10
-Text Label 3100 5500 0    60   ~ 0
-D9
-Text Label 3100 5400 0    60   ~ 0
-D8
 Text Label 3100 5300 0    60   ~ 0
+D12
+Text Label 3100 5400 0    60   ~ 0
+D11
+Text Label 3100 5500 0    60   ~ 0
+D10
+Text Label 3100 5600 0    60   ~ 0
+D9
+Text Label 3100 5700 0    60   ~ 0
+D8
+Text Label 3100 5800 0    60   ~ 0
 D7
 Text Label 3100 3450 0    60   ~ 0
 D6
