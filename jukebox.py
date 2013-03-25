@@ -1,18 +1,30 @@
 #!/usr/bin/env python
 
-
 import glob
 import json
 import os
 import select
+import serial
 import socket
 import subprocess
 import sys
 import time
 import traceback
 
+SERIAL  = '/dev/ttyUSB0'
+PORT    = 55555
+
+LETTERS = "ABCDEFGHJKLMNPQRSTUV"
+NUMBERS = range(1,9)
+
 DevNull = open('/dev/null','rw')
-PORT = 55555
+
+try:
+    ser = serial.Serial(SERIAL)
+    ser.setBaudrate(9600)
+except:
+    ser = None
+    traceback.print_exc()
 
 Q = []
 
@@ -71,6 +83,9 @@ def process(data, address):
         return
     try:
         (letter, number) = data.split()
+        assert(letter in LETTERS)
+        number = int(number)
+        assert(number in NUMBERS)
         Q.append((letter, number, time.time(), address))
     except:
         traceback.print_exc()
@@ -81,12 +96,23 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # Bind the socket to the port
 sock.bind(('0.0.0.0', PORT))
 
-while True:
-    (r,w,x) = select.select((sock,),(),(),1)
+if ser:
+    rs = (sock, ser)
+else:
+    rs = (sock,)
 
-    if r:
-        (data, address) = sock.recvfrom(4096)
-        process(data, address)
+while True:
+    (r,w,x) = select.select(rs,(),(),1)
+
+    try:
+        if sock in r:
+            (data, address) = sock.recvfrom(4096)
+            process(data, address)
+        elif ser in r:
+            data = ser.readline().strip()
+            process(data, SERIAL)
+    except:
+        pass
 
     if p:
         if p.poll() is not None:
@@ -100,7 +126,7 @@ while True:
             print(Q)
         else:
             (letter, number, epoch, address) = Q.pop(0)
-            p = playGlob("/var/jukebox/%s/%s/*" % (letter, number))
+            p = playGlob("/var/jukebox/%s/%d/*" % (letter, number))
             if p:
                 (filename, p) = p
     elif p:

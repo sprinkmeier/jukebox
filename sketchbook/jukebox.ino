@@ -84,17 +84,17 @@ char getLetter()
 
 void loop()
 {
-    char number;
     char letter;
+    char number;
     while(1)
     {
-        while(!(number = getNumber()));
-        Serial.println(number);
-
         while(!(letter = getLetter()));
-        Serial.print(number);
-        Serial.print(' ');
         Serial.println(letter);
+
+        while(!(number = getNumber()));
+        Serial.print(letter);
+        Serial.print(' ');
+        Serial.println(number);
 
         while(scanRows(2, 7));
         Serial.println("$");
