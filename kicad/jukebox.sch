@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 25 Mar 2013 19:16:14 CST
+EESchema Schematic File Version 2  date Mon 25 Mar 2013 21:26:21 CST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -246,27 +246,27 @@ F 1 "SW_PUSH" H 7600 5020 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 3100 5300 0    60   ~ 0
-D12
-Text Label 3100 5400 0    60   ~ 0
-D11
-Text Label 3100 5500 0    60   ~ 0
-D10
-Text Label 3100 5600 0    60   ~ 0
-D9
-Text Label 3100 5700 0    60   ~ 0
-D8
-Text Label 3100 5800 0    60   ~ 0
 D7
-Text Label 3100 3450 0    60   ~ 0
-D2
-Text Label 3100 3350 0    60   ~ 0
-D3
-Text Label 3100 3250 0    60   ~ 0
-D4
-Text Label 3100 3150 0    60   ~ 0
-D5
-Text Label 3100 3050 0    60   ~ 0
+Text Label 3100 5400 0    60   ~ 0
 D6
+Text Label 3100 5500 0    60   ~ 0
+D5
+Text Label 3100 5600 0    60   ~ 0
+D4
+Text Label 3100 5700 0    60   ~ 0
+D3
+Text Label 3100 5800 0    60   ~ 0
+D2
+Text Label 3100 3450 0    60   ~ 0
+D8
+Text Label 3100 3350 0    60   ~ 0
+D9
+Text Label 3100 3250 0    60   ~ 0
+D10
+Text Label 3100 3150 0    60   ~ 0
+D11
+Text Label 3100 3050 0    60   ~ 0
+D12
 $Comp
 L SW_PUSH SW-P1
 U 1 1 514E9722
