@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 25 Mar 2013 18:42:11 CST
+EESchema Schematic File Version 2  date Mon 25 Mar 2013 19:16:14 CST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -29,14 +29,13 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:jukebox-cache
 EELAYER 25  0
 EELAYER END
 $Descr A4 11700 8267
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "24 mar 2013"
+Date "25 mar 2013"
 Rev ""
 Comp ""
 Comment1 ""
@@ -259,15 +258,15 @@ D8
 Text Label 3100 5800 0    60   ~ 0
 D7
 Text Label 3100 3450 0    60   ~ 0
-D6
+D2
 Text Label 3100 3350 0    60   ~ 0
-D5
+D3
 Text Label 3100 3250 0    60   ~ 0
 D4
 Text Label 3100 3150 0    60   ~ 0
-D3
+D5
 Text Label 3100 3050 0    60   ~ 0
-D2
+D6
 $Comp
 L SW_PUSH SW-P1
 U 1 1 514E9722
