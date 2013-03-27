@@ -11,7 +11,7 @@ import sys
 import time
 import traceback
 
-SERIAL  = '/dev/ttyUSB0'
+SERIAL  = (sys.argv + ['/dev/ttyACM0'])[1]
 PORT    = 55555
 
 LETTERS = "ABCDEFGHJKLMNPQRSTUV"
