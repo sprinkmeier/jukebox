@@ -16,9 +16,18 @@ const char * button[] = { "1234*",
 
 #define BAUD 9600
 
+unsigned blink_ms = 1;
+
 void setup()
 {
     Serial.begin(BAUD);
+
+    // column: high-impedance
+    for (unsigned pin = 2; pin <= 7 ; pin++)
+    {
+        pinMode(pin, INPUT);
+        digitalWrite(pin, LOW);
+    }
 
     // row: tied high
     for (unsigned pin = 8; pin <= 12 ; pin++)
@@ -27,16 +36,15 @@ void setup()
         digitalWrite(pin, HIGH);
     }
 
-    // column: high-impedance
-    for (unsigned pin = 2; pin <= 7 ; pin++)
-    {
-        pinMode(pin, INPUT);
-        digitalWrite(pin, LOW);
-    }
+    // blinkenlight
+    pinMode(13, INPUT);
 }
 
 char scanRow(unsigned row)
 {
+
+    digitalWrite(13, ((millis() / blink_ms) & 1) ? HIGH : LOW);
+
     char ret = '\0';
     // strobe the row LOW
     pinMode(row, OUTPUT);
@@ -88,14 +96,17 @@ void loop()
     char number;
     while(1)
     {
+        blink_ms = 1000;
         while(!(letter = getLetter()));
         Serial.println(letter);
 
+        blink_ms = 500;
         while(!(number = getNumber()));
         Serial.print(letter);
         Serial.print(' ');
         Serial.println(number);
 
+        blink_ms = 250;
         while(scanRows(2, 7));
         Serial.println("$");
     }
