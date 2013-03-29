@@ -1,14 +1,18 @@
 MDs  =$(wildcard *.md)
 HTMLs=$(MDs:.md=.html)
 PDFs =$(HTMLs:.html=.pdf)
+DOC  =$(HTMLs) $(PDFs)
 
 CGI  =/usr/lib/cgi-bin/jukebox.cgi
 
-DOC  =$(HTMLs) $(PDFs)
+HTML =/var/www/index.html
 
-default: $(DOC) $(CGI)
+default: $(DOC) $(CGI) $(HTML)
 
 $(CGI): jukebox.cgi
+	sudo cp --update --verbose $^ $@
+
+$(HTML): index.html
 	sudo cp --update --verbose $^ $@
 
 %.pdf: %.html
