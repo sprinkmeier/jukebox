@@ -11,7 +11,9 @@ import sys
 import time
 import traceback
 
-SERIAL  = (sys.argv + ['/dev/ttyACM0'])[1]
+
+
+SERIAL  = (glob.glob('/dev/ttyUSB*') + glob.glob('/dev/ttyACM*') + [''])[0]
 PORT    = 55555
 
 LETTERS = "ABCDEFGHJKLMNPQRSTUV"
@@ -82,7 +84,9 @@ def process(data, address):
     if (data == 'Play'):
         return
     try:
-        (letter, number) = data.split()
+        data = data.split()
+        if (len(data) != 2): return
+        (letter, number) = data
         assert(letter in LETTERS)
         number = int(number)
         assert(number in NUMBERS)
@@ -109,7 +113,10 @@ while True:
             (data, address) = sock.recvfrom(4096)
             process(data, address)
         elif ser in r:
-            data = ser.readline().strip()
+            try:
+                data = ser.readline().strip()
+            except:
+                rs = (sock,)
             process(data, SERIAL)
     except:
         pass
