@@ -10,6 +10,7 @@ import socket
 import string
 import sys
 import time
+import traceback
 
 PORT    = 55555
 ADDRESS = ('localhost', PORT)
@@ -202,12 +203,15 @@ def status():
             message += 'Now Playing: <em>' + current + '</em><br/>'
             global title
             title = 'Jukebox - %s' % current
-	if ('length' in stat) and stat['length']:
-            message += str(stat['length']) + ' queued<br/><ol><li>'
-            message += '</li><li>'.join([x[0] + x[1] for x in stat['queue']])
+        length = stat.get('length', None)
+	if length:
+            message += str(length) + ' queued<br/><ol><li>'
+            queue = stat.get('queue', [])
+            message += '</li><li>'.join([x[0] + str(x[1]) for x in queue])
         message += '</li></ol>'
         return message
     except:
+#        return '\n<!--\n' + traceback.format_exc() + '\n-->\n'
         return ''
 
 message = ''
