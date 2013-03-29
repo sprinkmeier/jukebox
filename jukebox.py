@@ -82,7 +82,7 @@ def process(data, address):
         return
 
     if (data == 'Shutdown'):
-        os.system("sudo /sbin/shutdown")
+        os.system("sudo /sbin/poweroff")
         return
 
     if (data == 'Play'):
