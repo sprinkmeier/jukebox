@@ -15,19 +15,10 @@ const char * button[] = { "1234*",
                           "RSTUV"};
 
 #define BAUD 9600
-
-unsigned blink_ms = 1;
-
+#define RLY  13
 void setup()
 {
     Serial.begin(BAUD);
-
-    // column: high-impedance
-    for (unsigned pin = 2; pin <= 7 ; pin++)
-    {
-        pinMode(pin, INPUT);
-        digitalWrite(pin, LOW);
-    }
 
     // row: tied high
     for (unsigned pin = 8; pin <= 12 ; pin++)
@@ -36,15 +27,18 @@ void setup()
         digitalWrite(pin, HIGH);
     }
 
-    // blinkenlight
-    pinMode(13, INPUT);
+    // column: high-impedance
+    for (unsigned pin = 2; pin <= 7 ; pin++)
+    {
+        pinMode(pin, INPUT);
+        digitalWrite(pin, LOW);
+    }
+
+    pinMode(RLY, OUTPUT);
 }
 
 char scanRow(unsigned row)
 {
-
-    digitalWrite(13, ((millis() / blink_ms) & 1) ? HIGH : LOW);
-
     char ret = '\0';
     // strobe the row LOW
     pinMode(row, OUTPUT);
@@ -90,24 +84,42 @@ char getLetter()
     return scanRows(4,7);
 }
 
+bool timeout(unsigned long line)
+{
+    static unsigned      lastLine = 0;
+    static unsigned long lastTime = 0;
+
+    if (line == lastLine)
+    {
+        return (millis() - lastTime) > 5000;
+    }
+    lastLine = line;
+    lastTime = millis();
+    return false;
+}
+
+#define TIMEOUT  { if (timeout(__LINE__)) return; }
+
 void loop()
 {
+    while(scanRows(2, 7));
+    digitalWrite(RLY, LOW);
+
+    timeout(-1);
     char letter;
     char number;
-    while(1)
-    {
-        blink_ms = 1000;
-        while(!(letter = getLetter()));
-        Serial.println(letter);
 
-        blink_ms = 500;
-        while(!(number = getNumber()));
-        Serial.print(letter);
-        Serial.print(' ');
-        Serial.println(number);
+    Serial.print('$');
+    Serial.print(millis());
+    Serial.println('$');
 
-        blink_ms = 250;
-        while(scanRows(2, 7));
-        Serial.println("$");
-    }
+    while(!(letter = getLetter())) TIMEOUT;
+    Serial.println(letter);
+
+    digitalWrite(RLY, HIGH);
+
+    while(!(number = getNumber())) TIMEOUT;
+    Serial.print(letter);
+    Serial.print(' ');
+    Serial.println(number);
 }
