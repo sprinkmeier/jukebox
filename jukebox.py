@@ -76,11 +76,15 @@ def process(data, address):
         if p:
             p.kill()
         return
+
     if (data == 'Flush'):
         Q = []
         return
+
     if (data == 'Shutdown'):
+        os.system("sudo /sbin/shutdown")
         return
+
     if (data == 'Play'):
         return
     try:
@@ -93,6 +97,11 @@ def process(data, address):
         Q.append((letter, number, time.time(), address))
     except:
         traceback.print_exc()
+
+def dump(data):
+    with AtomicFile('/dev/shm/jukebox.json') as w:
+        w.write(json.dumps(data, indent=4, sort_keys=1))
+
 
 # Create a UDP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -141,9 +150,7 @@ while True:
     else:
         print('.')
 
-    with AtomicFile('/dev/shm/jukebox.json') as w:
-        w.write(json.dumps({'current': filename,
-                            'length' : len(Q),
-                            'queue'  : Q,
-                            },
-                           indent=4, sort_keys=1))
+    dump({'current': filename,
+          'length' : len(Q),
+          'queue'  : Q,
+          })
