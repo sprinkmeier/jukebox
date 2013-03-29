@@ -1,30 +1,26 @@
 MDs  =$(wildcard *.md)
 HTMLs=$(MDs:.md=.html)
-PSs  =$(HTMLs:.html=.ps)
-PDFs =$(PSs:.ps=.pdf)
-
-ALL  =$(HTMLs) $(PSs) $(PDFs)
+PDFs =$(HTMLs:.html=.pdf)
 
 CGI  =/usr/lib/cgi-bin/jukebox.cgi
 
-default: $(ALL) $(CGI)
+DOC  =$(HTMLs) $(PDFs)
+
+default: $(DOC) $(CGI)
 
 $(CGI): jukebox.cgi
 	sudo cp --update --verbose $^ $@
 
-%.pdf: %.ps
-	$(shell ps2pdf $^ $@ || rm $^ ; false )
-
-%.ps: %.html
-	$(shell html2ps < $^ > $@ || rm $^ ; false )
+%.pdf: %.html
+	html2ps < $^ | ps2pdf - > $@
 
 %.html: %.md
-	$(shell markdown $^ > $@ || rm $^ ; false )
+	markdown $^ > $@
 
 remake: clean
 	$(MAKE)
 
 clean:
-	-rm $(ALL)
+	-rm $(DOC)
 
 .PHONY: default remake clean
