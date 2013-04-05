@@ -23,6 +23,7 @@ form = cgi.FieldStorage()
 number = form.getvalue('number', None)
 letter = form.getvalue('letter', None)
 submit = form.getvalue('submit', None)
+chk    = form.getvalue('chk', None)
 
 try:
     upload = form['file']
@@ -99,6 +100,10 @@ def fileList():
     return dict(ret)
 
 def playlist(files):
+    if chk:
+        delBtn = '<input type="submit" name="submit" value="Delete">'
+    else:
+        delBtn = ''
     message = '<table border="1">\n'
 
 #    URL_FMT = "http://%s:%s/%s?letter=%%s&number=%%d" % (
@@ -111,8 +116,8 @@ def playlist(files):
     <input type=hidden name='letter' value='{letter}'>
     <input type=hidden name='number' value='{number}'>
     <input type="submit" name="submit" value="Play">
-    <input type="submit" name="submit" value="Delete">
-</form>""" %  (os.environ['SCRIPT_NAME'],)
+    %s
+</form>""" %  (os.environ['SCRIPT_NAME'],delBtn)
 
     for letter in sorted(files):
         d = files[letter]
@@ -177,12 +182,13 @@ def uploader(files):
 
     return message
 
-def button(name):
+def button(name, extra = ""):
     return """
    <form enctype="multipart/form-data" action="%s" method="post">
-        <p><input type="submit" name="submit" value="%s"></p>
+        <input type="submit" name="submit" value="%s">
+        %s
     </form>
-""" % (os.environ['SCRIPT_NAME'], name)
+""" % (os.environ['SCRIPT_NAME'], name, extra)
 
 
 def buttons():
@@ -190,8 +196,9 @@ def buttons():
     message += "</td><td>".join((button("Stop"),
                                  button("Flush"),
                                  button("Shutdown"),
+                                 button("Refresh","""<input type="checkbox" name="chk" value="del">Enable Delete</input>"""),
                             ))
-    message += "</td></tr></table>"
+    message += """</td></tr></table>"""
     return message
 
 def status():
