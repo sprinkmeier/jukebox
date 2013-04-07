@@ -6,6 +6,9 @@
 
 #include <ctype.h>
 
+boolean TEST_MODE = false;
+
+
 typedef struct
 {
     unsigned char pin;
@@ -14,51 +17,51 @@ typedef struct
 
 Button buttons[] = {
 
-    { 7,'!'}, // brown
-    { 6,'@'},
-    { 5,'#'},
-    { 4,'$'},
-    { 3,'%'},
-    { 2,'^'}, // blue
+//    { 7,'!'}, // brown
+//    { 6,'@'},
+    { 5,'A'},
+    { 4,'B'},
+    { 3,'L'},
+    { 2,'M'}, // blue
 
-    {14,'1'}, // grey
-    {15,'2'},
-    {16,'3'},
-    {17,'4'},
-    {18,'5'},
-    {19,'6'},
-    {20,'7'},
-    {21,'8'},
+    {14,'8'}, // grey
+    {15,'7'},
+    {16,'6'},
+    {17,'5'},
+    {18,'4'},
+    {19,'3'},
+    {20,'2'},
+    {21,'1'},
     ///// +5V // orange
-    {22,'0'},
-    {24,'-'}, // brown
+ //   {22,'\0'},
+ //   {24,' \0'}, // brown
 
     ////// +5V brown
-    {23,'Q'}, //red
-    {25,'W'},
+    {23,'C'}, //red
+    {25,'D'},
     {27,'E'},
-    {29,'R'},
-    {31,'T'},
-    {33,'Y'},
-    {35,'U'},
-/////////  {37,'I'}, // white
+    {29,'F'},
+    {31,'G'},
+    {33,'H'},
+    {35,'J'},
+    {37,'K'}, // white
 
-    {39,'A'},//brown
-    {41,'S'},
-    {43,'D'},
-    {45,'F'},
-    {47,'G'},
-    {49,'H'},
-    {51,'J'},
-    {53,'K'}, // grey
+    {39,'N'},//brown
+    {41,'P'},
+    {43,'Q'},
+    {45,'R'},
+    {47,'S'},
+    {49,'T'},
+    {51,'U'},
+    {53,'V'}, // grey
     ////// GND, white
 
     //// Pushbuttons
     //// GND blue
-    {50,'Z'},//green
-    {42,'X'},
-    {34,'C'},
-    {26,'V'},//red
+//    {50,'!'},//green
+//    {42,'@'},
+//    {34,'#'},
+//    {26,'$'},//red
 
 
 };
@@ -141,6 +144,15 @@ bool timeout(unsigned long line)
 
 void loop()
 {
+    while(TEST_MODE)
+    {
+      for (unsigned i = 0; i < NUM_BUTTONS; ++i)
+      {
+          if (digitalRead(buttons[i].pin)) continue;
+          Serial.println(buttons[i].label);
+      }
+    }
+
     timeout(-1);
 
     Serial.print  ('$');
