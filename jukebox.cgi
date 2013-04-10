@@ -12,6 +12,8 @@ import sys
 import time
 import traceback
 
+LETTERS = "ABCDEFGHJKLMNPQRSTUV"
+
 PORT    = 55555
 ADDRESS = ('localhost', PORT)
 
@@ -66,6 +68,10 @@ def uploadFile(upload, letter, number):
     return message
 
 def sendUDP(msg):
+    if msg in LETTERS:
+        for i in range(8):
+            sendUDP(msg + " " + str(i+1))
+        return
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     return sock.sendto(msg, ADDRESS)
 
@@ -90,11 +96,12 @@ def process(submit, letter, number):
     return "The file '<em>" + message + "</em>' was enqueued: " + str(sent)
 
 def fileList():
-    files = sorted(glob.glob('/var/jukebox/[A-Z]/*/*'))
-
     ret = collections.defaultdict(dict)
-    for file in files:
-        (letter, number, name) = tuple(file.split('/')[-3:])
+
+    for fn in sorted(glob.glob('/var/jukebox/[A-Z]/*/*')):
+        (fn, name)   = os.path.split(fn)
+        (fn, number) = os.path.split(fn)
+        (fn, letter) = os.path.split(fn)
         ret[letter][int(number)] = name
 
     return dict(ret)
@@ -121,7 +128,7 @@ def playlist(files):
 
     for letter in sorted(files):
         d = files[letter]
-        col1 = '<td rowspan="%d">%s</td>' % (len(d), letter)
+        col1 = '<td rowspan="%d" id="letter_%s">%s</td>' % (len(d), letter, button(letter))
         for number in sorted(d):
             name = "<a href='/jukebox/%s/%d/%s'>%s</a>" % (letter, number, d[number],d[number])
             message += ("""<TR>
@@ -139,7 +146,6 @@ def playlist(files):
     return message
 
 def uploader(files):
-    LETTERS = "ABCDEFGHJKLMNPQRSTUV"
 
     selected = ('A', 1)
     for letter in reversed(LETTERS):
@@ -221,7 +227,12 @@ def status():
 #        return '\n<!--\n' + traceback.format_exc() + '\n-->\n'
         return ''
 
-message = ''
+files = fileList()
+
+message = '&nbsp'.join(['<a href="#letter_%s">%s</a>' %
+                        (l, l) for l in sorted(files)])
+
+message += '<br/>'
 
 message += status()
 
@@ -230,8 +241,6 @@ message += buttons()
 message += uploadFile(upload, letter, number)
 
 message += process(submit, letter, number)
-
-files = fileList()
 
 message += playlist(files)
 
