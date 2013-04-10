@@ -3,6 +3,7 @@
 import cgi
 import cgitb
 import collections
+import csv
 import glob
 import json
 import os
@@ -229,6 +230,13 @@ def status():
 
 files = fileList()
 
+with open('/dev/shm/songs.csv','w') as w:
+    c = csv.writer(w)
+    c.writerow(('letter','number','name'))
+    for l in sorted(files):
+        for n in sorted(files[l]):
+            c.writerow((l,n,files[l][n]))
+
 message = '&nbsp'.join(['<a href="#letter_%s">%s</a>' %
                         (l, l) for l in sorted(files)])
 
@@ -246,6 +254,7 @@ message += playlist(files)
 
 message += uploader(files)
 
+message += '<br/><a href="/jukebox/songs.csv">songs.csv</a><br/>'
 
 print """\
 Content-Type: text/html\n
