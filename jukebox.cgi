@@ -37,6 +37,11 @@ def sanitize_filename(fname):
     sane = set(string.letters + string.digits + '-_.')
     return ''.join(c for c in fname if c in sane)
 
+def tr(d):
+    if not d:
+        return '<tr/>\n'
+    return '<tr><td>' + '</td><td>'.join(d) + '</td></tr>\n'
+
 def uploadFile(upload, letter, number):
     if upload is None:      return ''
     if not upload.filename: return ''
@@ -199,13 +204,13 @@ def button(name, extra = ""):
 
 
 def buttons():
-    message  = "<table><tr><td>"
-    message += "</td><td>".join((button("Stop"),
-                                 button("Flush"),
-                                 button("Shutdown"),
-                                 button("Refresh","""<input type="checkbox" name="chk" value="del">Enable Delete</input>"""),
+    message  = "<table>"
+    message += tr((button("Stop"),
+                   button("Flush"),
+                   button("Shutdown"),
+                   button("Refresh","""<input type="checkbox" name="chk" value="del">Enable Delete</input>"""),
                             ))
-    message += """</td></tr></table>"""
+    message += "</table>"
     return message
 
 def status():
@@ -219,10 +224,13 @@ def status():
             title = 'Jukebox - %s' % current
         length = stat.get('length', None)
 	if length:
-            message += str(length) + ' queued<br/><ol><li>'
+            message += str(length) + ' queued<br/>'
             queue = stat.get('queue', [])
-            message += '</li><li>'.join([x[0] + str(x[1]) for x in queue])
-        message += '</li></ol>'
+            message += '<table>'
+            while queue:
+                message += tr([x[0] + str(x[1]) for x in queue[:15]])
+                queue = queue[15:]
+            message += '</table>'
         return message
     except:
 #        return '\n<!--\n' + traceback.format_exc() + '\n-->\n'
