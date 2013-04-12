@@ -92,41 +92,45 @@ void setup()
     digitalWrite(30, LOW);
 }
 
-char getLetter()
+char getNumberOrLetter()
 {
+    // poll all the buttons once
     for (unsigned i = 0; i < NUM_BUTTONS; ++i)
     {
-        if (digitalRead(buttons[i].pin)) continue;
-        if (isdigit(buttons[i].label))   continue;
-        if (!isupper(buttons[i].label))
-        {
-            Serial.println(buttons[i].label);
-            delay(50);
-            while (!digitalRead(buttons[i].pin));
-            continue;
-        }
+        // keep going where we left off last time
+        static unsigned j = 0;
+        j = (j + 1) % NUM_BUTTONS;
+        Button & btn(buttons[j]);
 
-        return buttons[i].label;
+        // high == not pulled low, i.e. not pressed
+        if (digitalRead(btn.pin)) continue;
+
+        // return it if it's a number or letter
+        char b = btn.label;
+        if (isupper(b) || isdigit(b)) return b;
+
+        // control button. output it ...
+        Serial.println();
+        Serial.println(b);
+        // ... and wait for it to be released
+        while (!digitalRead(btn.pin)) delay(50);
     }
+    return '\0';
+}
+
+char getLetter()
+{
+    // return letter or NULL
+    char b = getNumberOrLetter();
+    if (isupper(b)) return b;
     return '\0';
 }
 
 char getNumber()
 {
-    for (unsigned i = 0; i < NUM_BUTTONS; ++i)
-    {
-        if (digitalRead(buttons[i].pin)) continue;
-        if (isupper(buttons[i].label))   continue;
-        if (!isdigit(buttons[i].label))
-        {
-            Serial.println(buttons[i].label);
-            delay(50);
-            while (!digitalRead(buttons[i].pin));
-            continue;
-        }
-
-        return buttons[i].label;
-    }
+    // return number or NULL
+    char b = getNumberOrLetter();
+    if (isdigit(b)) return b;
     return '\0';
 }
 
