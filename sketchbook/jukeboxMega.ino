@@ -184,4 +184,6 @@ void loop()
     Serial.print(' ');
     Serial.println(number);
 
+    // wait for the buttons to be released
+    while(getNumberOrLetter()) TIMEOUT;
 }
