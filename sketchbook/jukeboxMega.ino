@@ -8,13 +8,14 @@
 
 boolean TEST_MODE = false;
 
-
+// DIO pins are attached to buttons with certain labels
 typedef struct
 {
     unsigned char pin;
     char label;
 } Button;
 
+// define the buttons
 Button buttons[] = {
 
 //    { 7,'!'}, // brown
@@ -68,16 +69,19 @@ Button buttons[] = {
 
 #define NUM_BUTTONS (sizeof(buttons) / sizeof(Button))
 
-void setup(){
+void setup()
+{
     //start serial connection
     Serial.begin(9600);
 
+    // All the buttons are tied-high inputs
     for (unsigned i = 0; i < NUM_BUTTONS; ++i)
     {
         pinMode(buttons[i].pin, INPUT);
         digitalWrite(buttons[i].pin, HIGH);
     }
 
+    // The on-shield pushbuttons 'borrow' some DIO lines to use as ground
     pinMode     (46, OUTPUT);
     digitalWrite(46, LOW);
 
@@ -128,6 +132,7 @@ char getNumber()
 
 bool timeout(unsigned long line)
 {
+    // spin for at most 5 seconds on any givne line
     static unsigned      lastLine = 0;
     static unsigned long lastTime = 0;
 
@@ -144,6 +149,7 @@ bool timeout(unsigned long line)
 
 void loop()
 {
+    // test mode, just print out any/all pressed buttons
     while(TEST_MODE)
     {
       for (unsigned i = 0; i < NUM_BUTTONS; ++i)
@@ -153,20 +159,23 @@ void loop()
       }
     }
 
+    // reset the timeout line
     timeout(-1);
 
+    // print out the current timestamp
     Serial.print  ('$');
     Serial.print  (millis());
     Serial.println('$');
 
+    // wait until a letter is pressed
     char letter;
-
     while(!(letter = getLetter())) TIMEOUT;
-    Serial.println(letter);
+    Serial.println(letter); // redundant?
 
+    // now wait until a number is pressed
     char number;
-
     while(!(number = getNumber())) TIMEOUT;
+    // print out "$LETTER $NUMBER\n"
     Serial.print(letter);
     Serial.print(' ');
     Serial.println(number);
