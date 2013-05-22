@@ -3,6 +3,7 @@
 import glob
 import json
 import os
+import random
 import select
 import serial
 import socket
@@ -11,15 +12,34 @@ import sys
 import time
 import traceback
 
-
-
 SERIAL  = (glob.glob('/dev/ttyUSB*') + glob.glob('/dev/ttyACM*') + [''])[0]
 PORT    = 55555
 
 LETTERS = "ABCDEFGHJKLMNPQRSTUV"
 NUMBERS = range(1,9)
 
+CONFIG = '/var/jukebox/config.json'
+
 DevNull = open('/dev/null','rw')
+
+config = {}
+
+def readConfig():
+    global config
+    config = {
+        'dup': False,
+        'rpt': False,
+        'rnd': False,
+        'lim': 0,
+        }
+    try:
+        conf = json.loads(open(CONFIG).read())
+        for k,v in config.items():
+            config[k] = type(v)(conf[k])
+    except:
+        pass
+
+readConfig()
 
 try:
     ser = serial.Serial(SERIAL)
@@ -115,6 +135,14 @@ else:
     rs = (sock,)
 
 while True:
+    readConfig()
+    print(config)
+    if config['lim']:
+        Q = Q[:config['lim']]
+
+    if config['rnd']:
+        random.shuffle(Q)
+
     (r,w,x) = select.select(rs,(),(),1)
 
     try:
@@ -142,6 +170,15 @@ while True:
             print(Q)
         else:
             (letter, number, epoch, address) = Q.pop(0)
+            if config['rpt']:
+                Q.append((letter, number, epoch, address))
+            if not config['dup']:
+                while Q:
+                    (l, n, e, a) = Q[0]
+                    if (l == letter) and (n == number):
+                        Q.pop(0)
+                    else:
+                        break
             p = playGlob("/var/jukebox/%s/%d/*" % (letter, number))
             if p:
                 (filename, p) = p
