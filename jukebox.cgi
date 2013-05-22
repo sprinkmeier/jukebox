@@ -13,6 +13,7 @@ import sys
 import tarfile
 import time
 import traceback
+import zipfile
 
 LETTERS = "ABCDEFGHJKLMNPQRSTUV"
 
@@ -326,14 +327,13 @@ Queue Limit: <SELECT NAME="limit" SIZE=0>{opts}</SELECT>
 files = fileList()
 
 if (submit == "Download"):
-    if 1:
-        if 1:
+    if 1: # ZIP don't work.
+        if 1: # gz is overkill
             print("""Content-Type: application/tar
 Content-Disposition: attachment; filename="songs.tar"
 """)
             t = tarfile.open('songs.tar', 'w|', sys.stdout)
         else:
-            # gz is overkill.
             print("""Content-Type: application/x-gzip
 Content-Disposition: attachment; filename="songs.tar.gz"
 """)
@@ -347,11 +347,19 @@ Content-Disposition: attachment; filename="songs.tar.gz"
         t.close()
     else:
         # .zip files have better legacy support
+        # BUT!!!
+        # the zipfile lib does not seem to support stream output.
+        # makes sense, zipfiles have an index at the end of the file,
+        # so seeking is assumed.
         print("""Content-Type: application/zip
 Content-Disposition: attachment; filename="songs.zip"
 """)
         z = zipfile.ZipFile(sys.stdout,'w',compression=zipfile.ZIP_DEFLATED)
-        z.write('/etc/hosts')
+        for l in sorted(files):
+            for n in sorted(files[l]):
+                fn = files[l][n]
+                z.write('/var/jukebox/%s/%d/%s' % (l,n,fn),
+                        '%s%d - %s' % (l,n,fn))
         z.close()
 
     sys.exit(0)
