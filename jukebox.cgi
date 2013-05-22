@@ -10,6 +10,7 @@ import os
 import socket
 import string
 import sys
+import tarfile
 import time
 import traceback
 
@@ -263,6 +264,7 @@ def buttons():
     message += tr((button("Stop"),
                    button("Flush"),
                    button("Shutdown"),
+                   button("Download"),
                    button("Refresh","""<input type="checkbox" name="chk" value="del">Enable Delete</input>"""),
                             ))
     message += "</table>"
@@ -322,6 +324,38 @@ Queue Limit: <SELECT NAME="limit" SIZE=0>{opts}</SELECT>
            )
 
 files = fileList()
+
+if (submit == "Download"):
+    if 1:
+        if 1:
+            print("""Content-Type: application/tar
+Content-Disposition: attachment; filename="songs.tar"
+""")
+            t = tarfile.open('songs.tar', 'w|', sys.stdout)
+        else:
+            # gz is overkill.
+            print("""Content-Type: application/x-gzip
+Content-Disposition: attachment; filename="songs.tar.gz"
+""")
+            t = tarfile.open('songs.tar.gz', 'w|gz', sys.stdout)
+        t.add('/dev/shm/songs.csv','songs.csv')
+        for l in sorted(files):
+            for n in sorted(files[l]):
+                fn = files[l][n]
+                t.add('/var/jukebox/%s/%d/%s' % (l,n,fn),
+                      '%s%d - %s' % (l,n,fn))
+        t.close()
+    else:
+        # .zip files have better legacy support
+        print("""Content-Type: application/zip
+Content-Disposition: attachment; filename="songs.zip"
+""")
+        z = zipfile.ZipFile(sys.stdout,'w',compression=zipfile.ZIP_DEFLATED)
+        z.write('/etc/hosts')
+        z.close()
+
+    sys.exit(0)
+
 
 with open('/dev/shm/songs.csv','w') as w:
     c = csv.writer(w)
