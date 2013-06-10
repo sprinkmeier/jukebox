@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 01 Apr 2013 22:09:13 CST
+EESchema Schematic File Version 2  date Sat 11 May 2013 07:17:08 CST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -29,14 +29,13 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:jukebox-layout-cache
 EELAYER 25  0
 EELAYER END
 $Descr A4 11700 8267
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "1 apr 2013"
+Date "10 may 2013"
 Rev ""
 Comp ""
 Comment1 ""
@@ -44,250 +43,228 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Connection ~ 9700 3850
-Wire Wire Line
-	3750 4000 3750 3850
-Wire Wire Line
-	3750 3850 9700 3850
-Wire Wire Line
-	9700 3850 10600 3850
-Connection ~ 6400 3550
-Wire Wire Line
-	6400 4000 6400 3550
-Wire Wire Line
-	2850 4000 2850 3400
-Connection ~ 8800 3400
-Wire Wire Line
-	6100 4000 6100 3400
-Connection ~ 8500 3250
-Wire Wire Line
-	5800 3250 5800 4000
-Connection ~ 8200 3100
-Wire Wire Line
-	5500 3100 5500 4000
-Connection ~ 7900 2950
-Wire Wire Line
-	5200 2950 5200 4000
-Connection ~ 7600 2800
-Wire Wire Line
-	4900 2800 4900 4000
-Connection ~ 7300 2650
-Wire Wire Line
-	4600 2650 4600 4000
-Connection ~ 7000 2500
-Wire Wire Line
-	4300 2500 4300 4000
-Wire Wire Line
-	7300 4000 7300 2650
-Wire Wire Line
-	7900 4000 7900 2950
-Wire Wire Line
-	8500 4000 8500 3250
-Wire Wire Line
-	9100 3550 9100 4000
-Wire Wire Line
-	9700 3850 9700 4000
-Connection ~ 5500 4600
-Wire Wire Line
-	4300 4600 4600 4600
-Wire Wire Line
-	4600 4600 4900 4600
-Wire Wire Line
-	4900 4600 5200 4600
-Wire Wire Line
-	5200 4600 5500 4600
-Wire Wire Line
-	5500 4600 5800 4600
-Wire Wire Line
-	5800 4600 6100 4600
-Wire Wire Line
-	6100 4600 6400 4600
-Wire Wire Line
-	10600 4900 3750 4900
-Wire Wire Line
-	3750 4900 3750 4600
-Connection ~ 7900 4600
-Connection ~ 8800 4600
-Connection ~ 9100 4600
-Connection ~ 9400 4600
-Connection ~ 9700 4600
-Connection ~ 8200 4600
-Connection ~ 7600 4600
-Connection ~ 7300 4600
-Wire Wire Line
-	6400 4600 6400 4750
-Connection ~ 2850 4600
-Connection ~ 3150 4600
-Connection ~ 3450 4600
-Connection ~ 3750 4600
-Connection ~ 4600 4600
-Connection ~ 4900 4600
-Connection ~ 5200 4600
-Connection ~ 5800 4600
-Connection ~ 6100 4600
-Connection ~ 6400 4600
-Connection ~ 2250 4600
-Connection ~ 1950 4600
-Connection ~ 1650 4600
-Connection ~ 1350 4600
-Wire Wire Line
-	6400 4750 10600 4750
-Wire Wire Line
-	3750 4600 3450 4600
-Wire Wire Line
-	3450 4600 3150 4600
-Wire Wire Line
-	3150 4600 2850 4600
-Wire Wire Line
-	2850 4600 2550 4600
-Wire Wire Line
-	2550 4600 2250 4600
-Wire Wire Line
-	2250 4600 1950 4600
-Wire Wire Line
-	1950 4600 1650 4600
-Wire Wire Line
-	1650 4600 1350 4600
-Wire Wire Line
-	1350 4600 1050 4600
-Wire Wire Line
-	2550 4650 2550 4600
-Connection ~ 2550 4600
-Wire Wire Line
-	7000 4600 7300 4600
-Wire Wire Line
-	7300 4600 7600 4600
-Wire Wire Line
-	7600 4600 7900 4600
-Wire Wire Line
-	7900 4600 8200 4600
-Wire Wire Line
-	8200 4600 8500 4600
-Wire Wire Line
-	8500 4600 8800 4600
-Wire Wire Line
-	8800 4600 9100 4600
-Wire Wire Line
-	9100 4600 9400 4600
-Wire Wire Line
-	9400 4600 9700 4600
-Wire Wire Line
-	9700 4600 10600 4600
+Wire Bus Line
+	10500 4250 10500 4700
+Wire Bus Line
+	7950 3900 4550 3900
 Connection ~ 8500 4600
 Wire Wire Line
-	9400 3700 9400 4000
+	9700 4600 7000 4600
+Connection ~ 2550 4600
 Wire Wire Line
-	8800 3400 8800 4000
+	2550 4600 2550 4650
 Wire Wire Line
-	8200 4000 8200 3100
+	1050 4600 3750 4600
+Connection ~ 1350 4600
+Connection ~ 1650 4600
+Connection ~ 1950 4600
+Connection ~ 2250 4600
+Connection ~ 6400 4600
+Connection ~ 6100 4600
+Connection ~ 5800 4600
+Connection ~ 5200 4600
+Connection ~ 4900 4600
+Connection ~ 4600 4600
+Connection ~ 3750 4600
+Connection ~ 3450 4600
+Connection ~ 3150 4600
+Connection ~ 2850 4600
+Connection ~ 7300 4600
+Connection ~ 7600 4600
+Connection ~ 8200 4600
+Connection ~ 9700 4600
+Connection ~ 9400 4600
+Connection ~ 9100 4600
+Connection ~ 8800 4600
+Connection ~ 7900 4600
 Wire Wire Line
-	7600 4000 7600 2800
-Wire Wire Line
-	7000 4000 7000 2500
-Wire Wire Line
-	10600 2500 7000 2500
-Wire Wire Line
-	7000 2500 4300 2500
-Wire Wire Line
-	4300 2500 1050 2500
-Wire Wire Line
-	1050 2500 1050 4000
-Connection ~ 4300 2500
-Wire Wire Line
-	10600 2650 7300 2650
-Wire Wire Line
-	7300 2650 4600 2650
-Wire Wire Line
-	4600 2650 1350 2650
-Wire Wire Line
-	1350 2650 1350 4000
-Connection ~ 4600 2650
-Wire Wire Line
-	10600 2800 7600 2800
-Wire Wire Line
-	7600 2800 4900 2800
-Wire Wire Line
-	4900 2800 1650 2800
-Wire Wire Line
-	1650 2800 1650 4000
-Connection ~ 4900 2800
-Wire Wire Line
-	10600 2950 7900 2950
-Wire Wire Line
-	7900 2950 5200 2950
-Wire Wire Line
-	5200 2950 1950 2950
-Wire Wire Line
-	1950 2950 1950 4000
-Connection ~ 5200 2950
-Wire Wire Line
-	10600 3100 8200 3100
-Wire Wire Line
-	8200 3100 5500 3100
-Wire Wire Line
-	5500 3100 2250 3100
-Wire Wire Line
-	2250 3100 2250 4000
-Connection ~ 5500 3100
-Wire Wire Line
-	10600 3250 8500 3250
-Wire Wire Line
-	8500 3250 5800 3250
-Wire Wire Line
-	5800 3250 2550 3250
-Wire Wire Line
-	2550 3250 2550 4000
-Connection ~ 5800 3250
-Wire Wire Line
-	2850 3400 6100 3400
-Wire Wire Line
-	6100 3400 8800 3400
-Wire Wire Line
-	8800 3400 10600 3400
-Connection ~ 6100 3400
-Wire Wire Line
-	10600 3550 9100 3550
-Wire Wire Line
-	9100 3550 6400 3550
-Wire Wire Line
-	6400 3550 3150 3550
-Wire Wire Line
-	3150 3550 3150 4000
-Connection ~ 9100 3550
-Wire Wire Line
-	10600 3700 9400 3700
-Wire Wire Line
-	9400 3700 3450 3700
-Wire Wire Line
-	3450 3700 3450 4000
-Connection ~ 9400 3700
-Text Label 10600 3700 0    60   ~ 0
-D10
-Text Label 10600 3850 0    60   ~ 0
-D11
-Text Notes 900  4800 0    60   ~ 0
-    D8 D9 D10 D11 D12\nD7   1  2  3   4   *\nD6   5  6  7   8   #\nD5   A  B  C   D   E\nD4   F  G  H   J   K\nD3   L  M  N   P   Q\nD2   R  S  T   U   V
-Text Label 10600 2950 0    60   ~ 0
-D5
-Text Label 10600 3100 0    60   ~ 0
-D6
-Text Label 10600 3250 0    60   ~ 0
-D7
-Text Label 10600 3400 0    60   ~ 0
-D8
-Text Label 10600 3550 0    60   ~ 0
-D9
-Text Label 10600 2800 0    60   ~ 0
-D4
-Text Label 10600 2650 0    60   ~ 0
-D3
-Text Label 10600 2500 0    60   ~ 0
-D2
-Text Label 10600 4900 0    60   ~ 0
+	6400 4600 4300 4600
+Connection ~ 5500 4600
+Wire Bus Line
+	4400 3900 1150 3900
+Wire Bus Line
+	7800 3900 10500 3900
+Wire Bus Line
+	10500 4700 3850 4700
+Wire Bus Line
+	10500 3900 10500 2400
+Text Label 3750 4600 0    60   ~ 0
 A2
-Text Label 10600 4750 0    60   ~ 0
+Text Label 6400 4600 0    60   ~ 0
 A1
-Text Label 10600 4600 0    60   ~ 0
+Text Label 9700 4600 0    60   ~ 0
+A0
+Entry Wire Line
+	10500 4550 10600 4450
+Entry Wire Line
+	6400 4600 6500 4700
+Entry Wire Line
+	3750 4600 3850 4700
+Entry Wire Line
+	9700 4600 9800 4700
+Entry Wire Line
+	10500 4250 10600 4150
+Entry Wire Line
+	10500 4400 10600 4300
+Entry Wire Line
+	4300 4000 4400 3900
+Entry Wire Line
+	4600 4000 4700 3900
+Entry Wire Line
+	5500 4000 5600 3900
+Entry Wire Line
+	5800 4000 5900 3900
+Entry Wire Line
+	5200 4000 5300 3900
+Entry Wire Line
+	4900 4000 5000 3900
+Entry Wire Line
+	6100 4000 6200 3900
+Entry Wire Line
+	6400 4000 6500 3900
+Text Label 6400 4000 0    60   ~ 0
+D9
+Text Label 6100 4000 0    60   ~ 0
+D8
+Text Label 5800 4000 0    60   ~ 0
+D7
+Text Label 5500 4000 0    60   ~ 0
+D6
+Text Label 5200 4000 0    60   ~ 0
+D5
+Text Label 4900 4000 0    60   ~ 0
+D4
+Text Label 4600 4000 0    60   ~ 0
+D3
+Text Label 4300 4000 0    60   ~ 0
+D2
+Text Label 1050 4000 0    60   ~ 0
+D2
+Text Label 1350 4000 0    60   ~ 0
+D3
+Text Label 1650 4000 0    60   ~ 0
+D4
+Text Label 1950 4000 0    60   ~ 0
+D5
+Text Label 2250 4000 0    60   ~ 0
+D6
+Text Label 2550 4000 0    60   ~ 0
+D7
+Text Label 2850 4000 0    60   ~ 0
+D8
+Text Label 3150 4000 0    60   ~ 0
+D9
+Text Label 3450 4000 0    60   ~ 0
+D10
+Text Label 3750 4000 0    60   ~ 0
+D11
+Entry Wire Line
+	3450 4000 3550 3900
+Entry Wire Line
+	3750 4000 3850 3900
+Entry Wire Line
+	3150 4000 3250 3900
+Entry Wire Line
+	2850 4000 2950 3900
+Entry Wire Line
+	1650 4000 1750 3900
+Entry Wire Line
+	1950 4000 2050 3900
+Entry Wire Line
+	2550 4000 2650 3900
+Entry Wire Line
+	2250 4000 2350 3900
+Entry Wire Line
+	1350 4000 1450 3900
+Entry Wire Line
+	1050 4000 1150 3900
+Entry Wire Line
+	7000 4000 7100 3900
+Entry Wire Line
+	7300 4000 7400 3900
+Entry Wire Line
+	8200 4000 8300 3900
+Entry Wire Line
+	8500 4000 8600 3900
+Entry Wire Line
+	7900 4000 8000 3900
+Entry Wire Line
+	7600 4000 7700 3900
+Entry Wire Line
+	8800 4000 8900 3900
+Entry Wire Line
+	9100 4000 9200 3900
+Entry Wire Line
+	9700 4000 9800 3900
+Entry Wire Line
+	10500 3450 10600 3350
+Entry Wire Line
+	10500 3750 10600 3650
+Entry Wire Line
+	10500 3600 10600 3500
+Entry Wire Line
+	9400 4000 9500 3900
+Entry Wire Line
+	10500 2400 10600 2300
+Entry Wire Line
+	10500 2700 10600 2600
+Entry Wire Line
+	10500 2550 10600 2450
+Entry Wire Line
+	10500 3150 10600 3050
+Entry Wire Line
+	10500 3300 10600 3200
+Entry Wire Line
+	10500 3000 10600 2900
+Entry Wire Line
+	10500 2850 10600 2750
+Text Label 9700 4000 0    60   ~ 0
+D11
+Text Label 9400 4000 0    60   ~ 0
+D10
+Text Label 9100 4000 0    60   ~ 0
+D9
+Text Label 8800 4000 0    60   ~ 0
+D8
+Text Label 8500 4000 0    60   ~ 0
+D7
+Text Label 8200 4000 0    60   ~ 0
+D6
+Text Label 7900 4000 0    60   ~ 0
+D5
+Text Label 7600 4000 0    60   ~ 0
+D4
+Text Label 7300 4000 0    60   ~ 0
+D3
+Text Label 7000 4000 0    60   ~ 0
+D2
+Text Label 10600 3500 0    60   ~ 0
+D10
+Text Label 10600 3650 0    60   ~ 0
+D11
+Text Notes 5900 3100 0    60   ~ 0
+    D8 D9 D10 D11 D12\nD7   1  2  3   4   *\nD6   5  6  7   8   #\nD5   A  B  C   D   E\nD4   F  G  H   J   K\nD3   L  M  N   P   Q\nD2   R  S  T   U   V
+Text Label 10600 2750 0    60   ~ 0
+D5
+Text Label 10600 2900 0    60   ~ 0
+D6
+Text Label 10600 3050 0    60   ~ 0
+D7
+Text Label 10600 3200 0    60   ~ 0
+D8
+Text Label 10600 3350 0    60   ~ 0
+D9
+Text Label 10600 2600 0    60   ~ 0
+D4
+Text Label 10600 2450 0    60   ~ 0
+D3
+Text Label 10600 2300 0    60   ~ 0
+D2
+Text Label 10600 4150 0    60   ~ 0
+A2
+Text Label 10600 4300 0    60   ~ 0
+A1
+Text Label 10600 4450 0    60   ~ 0
 A0
 $Comp
 L SW_PUSH SW-U1
