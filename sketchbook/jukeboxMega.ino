@@ -8,14 +8,13 @@
 
 boolean TEST_MODE = false;
 
-// DIO pins are attached to buttons with certain labels
+
 typedef struct
 {
     unsigned char pin;
     char label;
 } Button;
 
-// define the buttons
 Button buttons[] = {
 
 //    { 7,'!'}, // brown
@@ -69,19 +68,16 @@ Button buttons[] = {
 
 #define NUM_BUTTONS (sizeof(buttons) / sizeof(Button))
 
-void setup()
-{
+void setup(){
     //start serial connection
     Serial.begin(9600);
 
-    // All the buttons are tied-high inputs
     for (unsigned i = 0; i < NUM_BUTTONS; ++i)
     {
         pinMode(buttons[i].pin, INPUT);
         digitalWrite(buttons[i].pin, HIGH);
     }
 
-    // The on-shield pushbuttons 'borrow' some DIO lines to use as ground
     pinMode     (46, OUTPUT);
     digitalWrite(46, LOW);
 
@@ -92,51 +88,46 @@ void setup()
     digitalWrite(30, LOW);
 }
 
-char getNumberOrLetter()
-{
-    // poll all the buttons once
-    for (unsigned i = 0; i < NUM_BUTTONS; ++i)
-    {
-        // keep going where we left off last time
-        static unsigned j = 0;
-        j = (j + 1) % NUM_BUTTONS;
-        Button & btn(buttons[j]);
-
-        // high == not pulled low, i.e. not pressed
-        if (digitalRead(btn.pin)) continue;
-
-        // return it if it's a number or letter
-        char b = btn.label;
-        if (isupper(b) || isdigit(b)) return b;
-
-        // control button. output it ...
-        Serial.println();
-        Serial.println(b);
-        // ... and wait for it to be released
-        while (!digitalRead(btn.pin)) delay(50);
-    }
-    return '\0';
-}
-
 char getLetter()
 {
-    // return letter or NULL
-    char b = getNumberOrLetter();
-    if (isupper(b)) return b;
+    for (unsigned i = 0; i < NUM_BUTTONS; ++i)
+    {
+        if (digitalRead(buttons[i].pin)) continue;
+        if (isdigit(buttons[i].label))   continue;
+        if (!isupper(buttons[i].label))
+        {
+ //           Serial.println(buttons[i].label);
+            delay(50);
+            while (!digitalRead(buttons[i].pin));
+            continue;
+        }
+
+        return buttons[i].label;
+    }
     return '\0';
 }
 
 char getNumber()
 {
-    // return number or NULL
-    char b = getNumberOrLetter();
-    if (isdigit(b)) return b;
+    for (unsigned i = 0; i < NUM_BUTTONS; ++i)
+    {
+        if (digitalRead(buttons[i].pin)) continue;
+        if (isupper(buttons[i].label))   continue;
+        if (!isdigit(buttons[i].label))
+        {
+//            Serial.println(buttons[i].label);
+            delay(50);
+            while (!digitalRead(buttons[i].pin));
+            continue;
+        }
+
+        return buttons[i].label;
+    }
     return '\0';
 }
 
 bool timeout(unsigned long line)
 {
-    // spin for at most 5 seconds on any givne line
     static unsigned      lastLine = 0;
     static unsigned long lastTime = 0;
 
@@ -153,7 +144,6 @@ bool timeout(unsigned long line)
 
 void loop()
 {
-    // test mode, just print out any/all pressed buttons
     while(TEST_MODE)
     {
       for (unsigned i = 0; i < NUM_BUTTONS; ++i)
@@ -163,27 +153,24 @@ void loop()
       }
     }
 
-    // reset the timeout line
     timeout(-1);
 
-    // print out the current timestamp
     Serial.print  ('$');
     Serial.print  (millis());
-    Serial.println('$');
+    Serial.println('&');
 
-    // wait until a letter is pressed
     char letter;
-    while(!(letter = getLetter())) TIMEOUT;
-    Serial.println(letter); // redundant?
 
-    // now wait until a number is pressed
+    while(!(letter = getLetter())) TIMEOUT;
+    Serial.println(letter);
+
     char number;
+
     while(!(number = getNumber())) TIMEOUT;
-    // print out "$LETTER $NUMBER\n"
     Serial.print(letter);
     Serial.print(' ');
     Serial.println(number);
 
-    // wait for the buttons to be released
-    while(getNumberOrLetter()) TIMEOUT;
+    while(getLetter() || getNumber());// TIMEOUT;
+
 }
