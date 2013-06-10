@@ -1,0 +1,554 @@
+EESchema Schematic File Version 2  date Thu 04 Apr 2013 07:59:30 CST
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:special
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+EELAYER 25  0
+EELAYER END
+$Descr A4 11700 8267
+encoding utf-8
+Sheet 1 1
+Title ""
+Date "3 apr 2013"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Text Label 9700 5500 0    60   ~ 0
+LV-D10
+Text Label 10750 5200 0    60   ~ 0
+LV-D10
+Wire Wire Line
+	10600 5200 10750 5200
+Wire Bus Line
+	10500 1100 10500 2600
+Connection ~ 10500 3800
+Connection ~ 10500 3650
+Connection ~ 10500 3500
+Connection ~ 10500 3350
+Connection ~ 10500 3200
+Connection ~ 10500 3050
+Connection ~ 10500 2900
+Connection ~ 10500 2750
+Wire Bus Line
+	10500 2750 10500 3800
+Wire Bus Line
+	4400 5300 6500 5300
+Wire Bus Line
+	6500 5300 6500 5150
+Wire Bus Line
+	10500 3950 10500 5300
+Connection ~ 5500 6150
+Connection ~ 7900 6150
+Connection ~ 8800 6150
+Connection ~ 9100 6150
+Connection ~ 9400 6150
+Connection ~ 9700 6150
+Connection ~ 8200 6150
+Connection ~ 7600 6150
+Connection ~ 7300 6150
+Connection ~ 2850 6150
+Connection ~ 3150 6150
+Connection ~ 3450 6150
+Connection ~ 3750 6150
+Connection ~ 4600 6150
+Connection ~ 4900 6150
+Connection ~ 5200 6150
+Connection ~ 5800 6150
+Connection ~ 6100 6150
+Connection ~ 6400 6150
+Connection ~ 2250 6150
+Connection ~ 1950 6150
+Connection ~ 1650 6150
+Connection ~ 1350 6150
+Wire Wire Line
+	2550 6150 2550 6200
+Connection ~ 2550 6150
+Wire Wire Line
+	1050 6150 10600 6150
+Connection ~ 8500 6150
+Wire Wire Line
+	10600 6150 10600 6200
+Connection ~ 7000 6150
+Connection ~ 4300 6150
+Wire Bus Line
+	10500 5300 7100 5300
+Wire Bus Line
+	6500 5150 10350 5150
+Wire Bus Line
+	10500 3800 10350 3800
+Wire Bus Line
+	10350 3800 10350 5150
+Wire Bus Line
+	1150 5300 3850 5300
+Wire Bus Line
+	10200 2600 10200 5000
+Wire Bus Line
+	10200 2600 10500 2600
+Wire Bus Line
+	10200 5000 3850 5000
+Wire Bus Line
+	3850 5000 3850 5300
+Wire Wire Line
+	9700 5550 9700 5400
+Entry Wire Line
+	10650 1100 10750 1000
+Entry Wire Line
+	10650 2300 10750 2200
+Entry Wire Line
+	10650 2450 10750 2350
+Entry Wire Line
+	10650 1700 10750 1600
+Entry Wire Line
+	10650 1850 10750 1750
+Entry Wire Line
+	10650 2150 10750 2050
+Entry Wire Line
+	10650 2000 10750 1900
+Entry Wire Line
+	10650 1400 10750 1300
+Entry Wire Line
+	10650 1550 10750 1450
+Entry Wire Line
+	10650 1250 10750 1150
+Entry Wire Line
+	3750 5400 3850 5300
+Entry Wire Line
+	3150 5400 3250 5300
+Entry Wire Line
+	3450 5400 3550 5300
+Entry Wire Line
+	2550 5400 2650 5300
+Entry Wire Line
+	2250 5400 2350 5300
+Entry Wire Line
+	2850 5400 2950 5300
+Entry Wire Line
+	1650 5400 1750 5300
+Entry Wire Line
+	1050 5400 1150 5300
+Entry Wire Line
+	1350 5400 1450 5300
+Entry Wire Line
+	1950 5400 2050 5300
+Entry Wire Line
+	10650 2600 10750 2500
+Entry Wire Line
+	10650 2900 10750 2800
+Entry Wire Line
+	10650 2750 10750 2650
+Entry Wire Line
+	10650 3350 10750 3250
+Entry Wire Line
+	10650 3500 10750 3400
+Entry Wire Line
+	10650 3200 10750 3100
+Entry Wire Line
+	10650 3050 10750 2950
+Entry Wire Line
+	10650 3800 10750 3700
+Entry Wire Line
+	10650 3650 10750 3550
+Entry Wire Line
+	6400 5400 6500 5300
+Entry Wire Line
+	5800 5400 5900 5300
+Entry Wire Line
+	5500 5400 5600 5300
+Entry Wire Line
+	6100 5400 6200 5300
+Entry Wire Line
+	4900 5400 5000 5300
+Entry Wire Line
+	4300 5400 4400 5300
+Entry Wire Line
+	4600 5400 4700 5300
+Entry Wire Line
+	5200 5400 5300 5300
+Entry Wire Line
+	7900 5400 8000 5300
+Entry Wire Line
+	7300 5400 7400 5300
+Entry Wire Line
+	7000 5400 7100 5300
+Entry Wire Line
+	7600 5400 7700 5300
+Entry Wire Line
+	8800 5400 8900 5300
+Entry Wire Line
+	8200 5400 8300 5300
+Entry Wire Line
+	8500 5400 8600 5300
+Entry Wire Line
+	9400 5400 9500 5300
+Entry Wire Line
+	9100 5400 9200 5300
+Entry Wire Line
+	9700 5400 9800 5300
+Entry Wire Line
+	10650 5150 10750 5050
+Entry Wire Line
+	10500 5300 10600 5200
+Entry Wire Line
+	10650 4550 10750 4450
+Entry Wire Line
+	10650 4700 10750 4600
+Entry Wire Line
+	10650 5000 10750 4900
+Entry Wire Line
+	10650 4850 10750 4750
+Entry Wire Line
+	10650 4250 10750 4150
+Entry Wire Line
+	10650 4400 10750 4300
+Entry Wire Line
+	10650 4100 10750 4000
+Entry Wire Line
+	10650 3950 10750 3850
+Text Label 10750 2200 0    60   ~ 0
+D10
+Text Label 10750 1450 0    60   ~ 0
+D5
+Text Label 10750 1600 0    60   ~ 0
+D6
+Text Label 10750 1750 0    60   ~ 0
+D7
+Text Label 10750 1900 0    60   ~ 0
+D8
+Text Label 10750 2050 0    60   ~ 0
+D9
+Text Label 10750 1300 0    60   ~ 0
+D4
+Text Label 10750 1150 0    60   ~ 0
+D3
+Text Label 10750 1000 0    60   ~ 0
+D2
+Text Label 10750 2350 0    60   ~ 0
+D2
+Text Label 10750 2500 0    60   ~ 0
+D3
+Text Label 10750 2650 0    60   ~ 0
+D4
+Text Label 10750 3400 0    60   ~ 0
+D9
+Text Label 10750 3250 0    60   ~ 0
+D8
+Text Label 10750 3100 0    60   ~ 0
+D7
+Text Label 10750 2950 0    60   ~ 0
+D6
+Text Label 10750 2800 0    60   ~ 0
+D5
+Text Label 10750 3700 0    60   ~ 0
+D11
+Text Label 10750 3550 0    60   ~ 0
+D10
+$Comp
+L GND #PWR01
+U 1 1 515BFF2E
+P 10600 6200
+F 0 "#PWR01" H 10600 6200 30  0001 C CNN
+F 1 "GND" H 10600 6130 30  0001 C CNN
+	1    10600 6200
+	1    0    0    -1  
+$EndComp
+Text Label 10750 5050 0    60   ~ 0
+D10
+Text Label 10750 4300 0    60   ~ 0
+D5
+Text Label 10750 4450 0    60   ~ 0
+D6
+Text Label 10750 4600 0    60   ~ 0
+D7
+Text Label 10750 4750 0    60   ~ 0
+D8
+Text Label 10750 4900 0    60   ~ 0
+D9
+Text Label 10750 4150 0    60   ~ 0
+D4
+Text Label 10750 4000 0    60   ~ 0
+D3
+Text Label 10750 3850 0    60   ~ 0
+D2
+$Comp
+L SW_PUSH SW-U1
+U 1 1 514F59F4
+P 9400 5850
+F 0 "SW-U1" H 9550 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 9400 5770 50  0000 C CNN
+	1    9400 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-V1
+U 1 1 514F59F3
+P 9700 5850
+F 0 "SW-V1" H 9850 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 9700 5770 50  0000 C CNN
+	1    9700 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-P1
+U 1 1 514E9722
+P 7900 5850
+F 0 "SW-P1" H 8050 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 7900 5770 50  0000 C CNN
+	1    7900 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-J1
+U 1 1 514E961D
+P 3450 5850
+F 0 "SW-J1" H 3600 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 3450 5770 50  0000 C CNN
+	1    3450 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-K1
+U 1 1 514E961C
+P 3750 5850
+F 0 "SW-K1" H 3900 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 3750 5770 50  0000 C CNN
+	1    3750 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-L1
+U 1 1 514E961B
+P 7000 5850
+F 0 "SW-L1" H 7150 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 7000 5770 50  0000 C CNN
+	1    7000 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-M1
+U 1 1 514E961A
+P 7300 5850
+F 0 "SW-M1" H 7450 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 7300 5770 50  0000 C CNN
+	1    7300 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-N1
+U 1 1 514E9619
+P 7600 5850
+F 0 "SW-N1" H 7750 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 7600 5770 50  0000 C CNN
+	1    7600 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-T1
+U 1 1 514E95E8
+P 9100 5850
+F 0 "SW-T1" H 9250 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 9100 5770 50  0000 C CNN
+	1    9100 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-Q1
+U 1 1 514E95E7
+P 8200 5850
+F 0 "SW-Q1" H 8350 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 8200 5770 50  0000 C CNN
+	1    8200 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-A1
+U 1 1 514E95E6
+P 1050 5850
+F 0 "SW-A1" H 1200 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 1050 5770 50  0000 C CNN
+	1    1050 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-B1
+U 1 1 514E95E5
+P 1350 5850
+F 0 "SW-B1" H 1500 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 1350 5770 50  0000 C CNN
+	1    1350 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-C1
+U 1 1 514E95E4
+P 1650 5850
+F 0 "SW-C1" H 1800 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 1650 5770 50  0000 C CNN
+	1    1650 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-H1
+U 1 1 514E95E3
+P 3150 5850
+F 0 "SW-H1" H 3300 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 3150 5770 50  0000 C CNN
+	1    3150 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-G1
+U 1 1 514E95E2
+P 2850 5850
+F 0 "SW-G1" H 3000 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 2850 5770 50  0000 C CNN
+	1    2850 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-F1
+U 1 1 514E95E1
+P 2550 5850
+F 0 "SW-F1" H 2700 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 2550 5770 50  0000 C CNN
+	1    2550 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-E1
+U 1 1 514E95E0
+P 2250 5850
+F 0 "SW-E1" H 2400 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 2250 5770 50  0000 C CNN
+	1    2250 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-D1
+U 1 1 514E95DF
+P 1950 5850
+F 0 "SW-D1" H 2100 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 1950 5770 50  0000 C CNN
+	1    1950 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-R1
+U 1 1 514E9579
+P 8500 5850
+F 0 "SW-R1" H 8650 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 8500 5770 50  0000 C CNN
+	1    8500 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-6
+U 1 1 514E9578
+P 5800 5850
+F 0 "SW-6" H 5950 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 5800 5770 50  0000 C CNN
+	1    5800 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-7
+U 1 1 514E9577
+P 6100 5850
+F 0 "SW-7" H 6250 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 6100 5770 50  0000 C CNN
+	1    6100 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-8
+U 1 1 514E9576
+P 6400 5850
+F 0 "SW-8" H 6550 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 6400 5770 50  0000 C CNN
+	1    6400 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-S1
+U 1 1 514E9575
+P 8800 5850
+F 0 "SW-S1" H 8950 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 8800 5770 50  0000 C CNN
+	1    8800 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-5
+U 1 1 514E946A
+P 5500 5850
+F 0 "SW-5" H 5650 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 5500 5770 50  0000 C CNN
+	1    5500 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-4
+U 1 1 514E9439
+P 5200 5850
+F 0 "SW-4" H 5350 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 5200 5770 50  0000 C CNN
+	1    5200 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-3
+U 1 1 514E9435
+P 4900 5850
+F 0 "SW-3" H 5050 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 4900 5770 50  0000 C CNN
+	1    4900 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-2
+U 1 1 514E9431
+P 4600 5850
+F 0 "SW-2" H 4750 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 4600 5770 50  0000 C CNN
+	1    4600 5850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L SW_PUSH SW-1
+U 1 1 514E93CA
+P 4300 5850
+F 0 "SW-1" H 4450 5960 50  0000 C CNN
+F 1 "SW_PUSH" H 4300 5770 50  0000 C CNN
+	1    4300 5850
+	0    -1   -1   0   
+$EndComp
+$EndSCHEMATC
