@@ -368,10 +368,19 @@ Content-Disposition: attachment; filename="songs.zip"
 with open('/dev/shm/songs.csv','w') as w:
     c = csv.writer(w)
     c.writerow(('letter','number','name'))
-    for l in sorted(files):
-        for n in sorted(files[l]):
-            c.writerow((l,n,files[l][n]))
-
+    letters = sorted(LETTERS)
+    while letters:
+        l1 = letters.pop(0)
+        l2 = letters.pop(0)
+        for n in range(1,9):
+            try:
+                c.writerow((l1,n,files[l1][n]))
+            except:
+                pass
+            try:
+                c.writerow((l2,n,files[l2][n]))
+            except:
+                pass
 message = '&nbsp'.join(['<a href="#letter_%s">%s</a>' %
                         (l, l) for l in sorted(files)])
 
