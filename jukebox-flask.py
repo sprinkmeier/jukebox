@@ -12,11 +12,21 @@ from flask.ext.wtf import Form
 from wtforms import TextField, validators
 
 import collections
+import glob
+import os
 
 app = Flask(__name__)
 
 
 TEMPLATE = 'jukebox.html'
+
+def fileList():
+    ret = collections.OrderedDict()
+    for pth in sorted(glob.glob('/var/jukebox/*')):
+        ret[os.path.split(pth)[1]] = [os.path.split(x)[1] for x in sorted(glob.glob(os.path.join(pth,'*')))]
+
+    return ret
+
 
 
 @app.route('/')
@@ -38,23 +48,7 @@ def get_register():
 
     form = RegoForm()
 
-    form.letters = "ABCD"
-    form.songs = {'A': ["ABC","DEF","GHJ","JKL",],
-                  'B': [],
-                  'C': [],
-                  'D': ["xyz","stu"],
-                  'E': ["lmn","opq"],
-                  }
-#    form.songs = ["ABC","DEF","GHJ","JKL",]
-
-    form.songs = collections.OrderedDict()
-
-    form.songs['A'] = ["ABC","DEF","GHJ","JKL",]
-    form.songs['B'] = []
-    form.songs['C'] = []
-    form.songs['D'] = ["xyz","stu"]
-    form.songs['E'] = ["lmn","opq"]
-
+    form.songs = fileList()
 
     if form.validate_on_submit():
         return "Success"
