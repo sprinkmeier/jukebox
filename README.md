@@ -73,7 +73,7 @@ The link allows you to download files.
 
 Edit the auto-start file:
 
-    sudo vi rc.local
+    sudo vi /etc/rc.local
 
 To include the following:
 
