@@ -30,9 +30,9 @@ Stage 1 is based on a Raspberry Pi with a standard Raspian image.
 ### packages
 
 You need the *sox* package with all the supported formats to
-play the audio files:
+play the audio files, as well as a few utilities:
 
-    sudo apt-get install libsox-fmt-all sox
+    sudo apt-get install libsox-fmt-all sox screen markdown html2ps
 
 and a web-server:
 
