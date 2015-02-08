@@ -56,6 +56,7 @@ Install the CGI script:
 
     cd ~/GIT/jukebox
     sudo cp --update --verbose ./jukebox.cgi /usr/lib/cgi-bin/
+    sudo ln --symbolic /dev/shm/songs.csv /var/jukebox/
 
 and override the 'welcome' page to redirect to it:
 
